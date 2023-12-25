@@ -1,0 +1,28 @@
+name: Create or update a Github variable or secret
+description: Create or update a Github variable or secret
+author: murami.ike@gmail.com
+inputs:
+  key:
+    description: a key of a created or updated secret / variable in Github
+    required: true
+  value:
+    description: a new value for a secret or variable
+    required: true
+  level:
+    description: Where save a secret — in a repository or organization
+    required: true
+    default: repository  # organization or repository
+  token:
+    description: Token with permission to create secrets in an organization or repository.
+    required: true
+  type:
+    description: It is a variable or secret
+    required: true
+    default: secret  # secret or variable
+  visibility:
+    description: Visibility level for organization's secrets
+    required: false
+    default: private
+runs:
+  using: 'node20'
+  main: 'dist/index.js'

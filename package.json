@@ -1,0 +1,33 @@
+{
+  "name": "update-secret-action",
+  "version": "1.0.0",
+  "description": "The Github action updates a secret (in a repository or organization)",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "ncc build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asman-go/update-secret-action.git"
+  },
+  "keywords": [
+    "github",
+    "actions",
+    "secrets"
+  ],
+  "author": "murami.ike@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/asman-go/update-secret-action/issues"
+  },
+  "homepage": "https://github.com/asman-go/update-secret-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0",
+    "sodium-native": "^4.0.4"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.1"
+  }
+}
