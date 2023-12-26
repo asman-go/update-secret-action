@@ -10,14 +10,14 @@ inputs:
     required: true
   level:
     description: Where save a secret — in a repository or organization
-    required: true
+    required: false
     default: repository  # organization or repository
   token:
     description: Token with permission to create secrets in an organization or repository.
     required: true
   type:
     description: It is a variable or secret
-    required: true
+    required: false
     default: secret  # secret or variable
   visibility:
     description: Visibility level for organization's secrets
