@@ -1,24 +1,45 @@
 # update-secret-action
-The Github action updates a secret (in a repository or organization)
+
+The Github action updates a secret (in a repository or organization).
 
 ## Inputs
 
-### `who-to-greet`
+### `key`
 
-**Required** The name of the person to greet. Default `"World"`.
+**Required** The key of a created or updated secret / variable in Github. 
+
+### `value`
+
+**Required** The new value for a secret or variable.
+
+### `level`
+
+Where save a secret — in a `repository` or `organization`. Default `"repository"`.
+
+### `token`
+
+**Required** A token with permission to create secrets in an organization or repository.
+
+### `type`
+
+It is a `variable` or `secret`. Default `"secret"`.
+
+### `visibility`
+
+Visibility level for organization's secrets. Options: `"all"`, `"private"` or `"selected"`. Default `"private"`.
 
 ## Outputs
 
-### `time`
-
-The time we greeted you.
+No outputs.
 
 ## Example usage
 
 ```yaml
-uses: actions/hello-world-javascript-action@e76147da8e5c81eaf017dede5645551d4b94427b
+uses: asman-go/update-secret-action@v0.1
 with:
-  who-to-greet: 'Mona the Octocat'
+  key: SECRET_KEY
+  value: SECRET_VALUE
+  token: ${{ secrets.PAT_GITHUB_TOKEN }}
 ```
 
 # Local developing
@@ -31,4 +52,5 @@ npm i
 
 ## Release
 
-https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action
+- With workflows: https://github.com/github-developer/javascript-action
+- https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action
