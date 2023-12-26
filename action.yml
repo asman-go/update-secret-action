@@ -37,21 +37,17 @@ runs:
         echo "NODE_PATH=$(npm root -g)" >> $GITHUB_ENV
 
     - name: Create a variable value for a organization or repository
+      if: ${{ inputs.type == 'variable' }}
       uses: actions/github-script@v7
       env:
         VARIABLE_KEY: ${{ inputs.key }}
         VARIABLE_VALUE: ${{ inputs.value }}
         LEVEL: ${{ inputs.level }}
         VISIBILITY: ${{ inputs.visibility }}
-        TYPE: ${{ inputs.type }}
       with:
         result-encoding: string
         github-token: ${{ inputs.token }}
         script: |
-          if (process.env.TYPE !== 'variable') {
-            exit(0);
-          }
-
           const sodium = require('sodium-native');
 
           let requestParameters
@@ -78,21 +74,17 @@ runs:
           });
 
     - name: Update a secret value for a organization or repository
+      if: ${{ inputs.type == 'secret' }}
       uses: actions/github-script@v7
       env:
         SECRET_KEY: ${{ inputs.key }}
         SECRET_VALUE: ${{ inputs.value }}
         LEVEL: ${{ inputs.level }}
         VISIBILITY: ${{ inputs.visibility }}
-        TYPE: ${{ inputs.type }}
       with:
         result-encoding: string
         github-token: ${{ inputs.token }}
         script: |
-          if (process.env.TYPE !== 'secret') {
-            exit(0);
-          }
-
           const sodium = require('sodium-native');
 
           // Parameters
