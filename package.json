@@ -4,8 +4,6 @@
   "description": "The Github action updates a secret (in a repository or organization)",
   "main": "src/index.js",
   "scripts": {
-    "build": "ncc build -o dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
