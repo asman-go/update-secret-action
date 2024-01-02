@@ -81,8 +81,10 @@ runs:
               updateVariable = github.rest.actions[`updateRepoVariable`]
           }
 
+          let resp = {}
+
           try {
-            let resp = await getVariable({
+            resp = await getVariable({
               ...requestParameters,
               name: process.env.VARIABLE_KEY
             })
