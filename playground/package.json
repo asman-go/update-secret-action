@@ -1,0 +1,21 @@
+{
+  "name": "playground",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Github API playground",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "github",
+    "actions",
+    "javascript"
+  ],
+  "author": "murami.ike@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "@octokit/rest": "^20.0.2",
+    "sodium-native": "^4.0.4"
+  }
+}
