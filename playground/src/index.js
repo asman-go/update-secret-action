@@ -3,7 +3,7 @@ import sodium from 'sodium-native';
 
 
 const TOKEN = process.env.GITHUB_TOKEN
-const VARIABLE_NAME = 'BUCKET_NAME'
+const VARIABLE_NAME = 'FOLDER_NAME'
 const OWNER = 'asman-go'
 const REPO = 'terraform-init'
 
@@ -23,10 +23,15 @@ if ('name' in resp.data) {
     console.log('REPO', resp.data.name, resp.data.value)
 }
 
-resp = await octokit.rest.actions.getOrgVariable({
-    org: OWNER,
-    name: VARIABLE_NAME
-})
+try {
+    resp = await octokit.rest.actions.getOrgVariable({
+        org: OWNER,
+        name: VARIABLE_NAME
+    })
+} catch (error) {
+    console.log('kvdknv')
+}
+
 
 if ('name' in resp.data) {
     console.log('ORG', resp.data.name, resp.data.value)
