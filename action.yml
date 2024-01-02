@@ -51,29 +51,59 @@ runs:
           const sodium = require('sodium-native');
 
           let requestParameters
+          let additionalParameters
+
+          let getVariable
           let createVariable
+          let updateVariable
+          let createOrUpdateVariable
 
           if (process.env.LEVEL === "organization") {
               requestParameters = {
-                org: context.repo.owner,
+                org: context.repo.owner
+              }
+              additionalParameters = {
                 visibility: process.env.VISIBILITY
               }
+
+              getVariable = github.rest.actions[`getOrgVariable`]
               createVariable = github.rest.actions[`createOrgVariable`]
+              updateVariable = github.rest.actions[`updateOrgVariable`]
           }
           if (process.env.LEVEL === "repository") {
               requestParameters = {
                 ...context.repo
               }
+              additionalParameters = {}
+
+              getVariable = github.rest.actions[`getRepoVariable`]
               createVariable = github.rest.actions[`createRepoVariable`]
+              updateVariable = github.rest.actions[`updateRepoVariable`]
           }
 
-          await createVariable({
-            ...requestParameters, 
+          let resp = await getVariable({
+            ...requestParameters,
+            name: process.env.VARIABLE_KEY
+          })
+
+          if ('name' in resp.data) {
+            // Update variable
+            createOrUpdateVariable = updateVariable
+          }
+          else {
+            // Create new variable
+            createOrUpdateVariable = createVariable
+          }
+
+          await createOrUpdateVariable({
+            ...requestParameters,
+            ...additionalParameters,
             name: process.env.VARIABLE_KEY,
             value: process.env.VARIABLE_VALUE
           });
 
-    - name: Update a secret value for a organization or repository
+
+    - name: Create or update a secret value for a organization or repository
       if: ${{ inputs.type == 'secret' }}
       uses: actions/github-script@v7
       env:
