@@ -93,7 +93,7 @@ runs:
           
           }
 
-          if ('name' in resp.data) {
+          if (resp && resp.data && 'name' in resp.data) {
             // Update variable
             createOrUpdateVariable = updateVariable
           }
